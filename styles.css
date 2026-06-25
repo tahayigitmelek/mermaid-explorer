@@ -1,0 +1,602 @@
+/* ─── Root ─── */
+
+.mermaid-explorer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 0;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: var(--font-interface);
+}
+
+/* ─── Header ─── */
+
+.mermaid-explorer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.mermaid-explorer-header h2 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.3;
+	letter-spacing: -0.01em;
+}
+
+.mermaid-explorer-subtitle,
+.mermaid-explorer-index-progress,
+.mermaid-explorer-list-path,
+.mermaid-explorer-stat-label {
+	color: var(--text-muted);
+	font-size: 11px;
+}
+
+/* ─── Index progress ─── */
+
+.mermaid-explorer-index-progress {
+	flex-basis: 100%;
+	min-width: 0;
+	display: grid;
+	grid-template-columns: auto minmax(140px, 1fr);
+	align-items: center;
+	gap: 6px 10px;
+}
+
+.mermaid-explorer-index-progress-label {
+	white-space: nowrap;
+	font-size: 11px;
+}
+
+.mermaid-explorer-index-progress-path {
+	grid-column: 1 / -1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--text-faint);
+	font-size: 11px;
+}
+
+.mermaid-explorer-progress-track {
+	height: 4px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: var(--background-modifier-border);
+}
+
+.mermaid-explorer-progress-fill {
+	height: 100%;
+	border-radius: inherit;
+	background: var(--interactive-accent);
+	transition: width 200ms ease;
+}
+
+/* ─── Body layout ─── */
+
+.mermaid-explorer-body {
+	display: grid;
+	grid-template-columns: minmax(240px, 30%) minmax(0, 1fr);
+	height: 100%;
+	min-height: 0;
+}
+
+/* ─── Sidebar ─── */
+
+.mermaid-explorer-sidebar {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	min-height: 0;
+	border-right: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+}
+
+.mermaid-explorer-search {
+	margin: 10px 12px 6px;
+	width: calc(100% - 24px);
+	min-height: 30px;
+	border-radius: 6px;
+	font-size: 12px;
+}
+
+/* ─── Filters ─── */
+
+.mermaid-explorer-filters {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 6px;
+	padding: 0 12px 10px;
+}
+
+.mermaid-explorer-select {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-width: 0;
+	color: var(--text-muted);
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.mermaid-explorer-select select {
+	width: 100%;
+	min-width: 0;
+	font-size: 12px;
+}
+
+/* ─── List header + shared bar styles ─── */
+
+.mermaid-explorer-list-header,
+.mermaid-explorer-action-bar,
+.mermaid-explorer-preview-tools,
+.mermaid-explorer-editor-tools,
+.mermaid-explorer-segmented {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.mermaid-explorer-list-header {
+	justify-content: space-between;
+	padding: 6px 12px;
+	border-top: 1px solid var(--background-modifier-border);
+	border-bottom: 1px solid var(--background-modifier-border);
+	font-size: 11px;
+	color: var(--text-faint);
+}
+
+/* ─── Diagram list ─── */
+
+.mermaid-explorer-list {
+	overflow: auto;
+	min-height: 0;
+}
+
+.mermaid-explorer-list-item {
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr);
+	gap: 10px;
+	padding: 10px 12px;
+	border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
+	cursor: pointer;
+	transition: background 120ms ease;
+}
+
+.mermaid-explorer-list-item.has-no-thumbnail {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.mermaid-explorer-list-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.mermaid-explorer-list-item.is-selected {
+	background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-primary));
+}
+
+/* ─── Thumbnails ─── */
+
+.mermaid-explorer-thumbnail {
+	width: 64px;
+	height: 48px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 5px;
+}
+
+.mermaid-explorer-thumbnail.is-deferred::before {
+	content: "";
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 1.5px solid var(--background-modifier-border);
+}
+
+/* ─── List item content ─── */
+
+.mermaid-explorer-list-content {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.mermaid-explorer-list-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 12.5px;
+	font-weight: 500;
+}
+
+.mermaid-explorer-list-path {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 11px;
+}
+
+/* ─── Badge ─── */
+
+.mermaid-explorer-badge {
+	display: inline-flex;
+	align-items: center;
+	width: fit-content;
+	max-width: 100%;
+	padding: 1px 6px;
+	border-radius: 4px;
+	background: color-mix(in srgb, var(--interactive-accent) 10%, transparent);
+	color: var(--text-muted);
+	font-size: 10px;
+	line-height: 1.5;
+	white-space: nowrap;
+}
+
+/* ─── Workspace ─── */
+
+.mermaid-explorer-workspace {
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ─── Action bar ─── */
+
+.mermaid-explorer-action-bar {
+	flex-wrap: wrap;
+	padding: 8px 12px;
+	gap: 2px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ─── Buttons ─── */
+
+.mermaid-explorer-icon-button,
+.mermaid-explorer-text-button,
+.mermaid-explorer-segmented button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	min-height: 28px;
+	border-radius: 5px;
+	transition: background 100ms ease, color 100ms ease;
+}
+
+.mermaid-explorer-icon-button {
+	width: 28px;
+	padding: 0;
+}
+
+/* ─── Segmented control (mode switcher) ─── */
+
+.mermaid-explorer-segmented {
+	padding: 2px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	background: var(--background-secondary);
+}
+
+.mermaid-explorer-segmented button {
+	padding: 0 10px;
+	min-height: 26px;
+	background: transparent;
+	box-shadow: none;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.mermaid-explorer-segmented button.is-active {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-radius: 4px;
+}
+
+/* ─── Detail / Editor layout ─── */
+
+.mermaid-explorer-detail,
+.mermaid-explorer-editor {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 260px;
+	gap: 0;
+	height: 100%;
+	min-height: 0;
+}
+
+.mermaid-explorer-preview-column,
+.mermaid-explorer-source-pane,
+.mermaid-explorer-live-preview {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.mermaid-explorer-preview-tools,
+.mermaid-explorer-editor-tools {
+	padding: 6px 8px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ─── Preview frame ─── */
+
+.mermaid-explorer-preview-frame,
+.mermaid-explorer-live-preview {
+	flex: 1;
+	overflow: auto;
+	padding: 20px;
+	background: var(--background-primary);
+}
+
+.mermaid-explorer-preview-frame svg,
+.mermaid-explorer-live-preview svg,
+.mermaid-explorer-thumbnail svg {
+	max-width: none;
+}
+
+.mermaid-explorer-svg {
+	transform: scale(var(--mermaid-explorer-zoom, 1));
+	transform-origin: center center;
+}
+
+/* ─── Metadata panel ─── */
+
+.mermaid-explorer-metadata {
+	overflow: auto;
+	padding: 16px;
+	border-left: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+}
+
+.mermaid-explorer-metadata h3 {
+	margin: 0 0 12px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--text-muted);
+}
+
+.mermaid-explorer-metadata-row {
+	display: grid;
+	grid-template-columns: 80px minmax(0, 1fr);
+	gap: 8px;
+	padding: 6px 0;
+	border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
+	font-size: 11.5px;
+}
+
+.mermaid-explorer-metadata-row span:first-child {
+	color: var(--text-faint);
+	font-size: 11px;
+}
+
+.mermaid-explorer-metadata-row span:last-child {
+	overflow-wrap: anywhere;
+}
+
+.mermaid-explorer-metadata-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 14px;
+}
+
+/* ─── Editor panes ─── */
+
+.mermaid-explorer-editor {
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.mermaid-explorer-source-pane {
+	border-right: 1px solid var(--background-modifier-border);
+}
+
+.mermaid-explorer-code-shell {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+	background: var(--code-background);
+}
+
+.mermaid-explorer-highlight,
+.mermaid-explorer-code-editor {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 14px;
+	overflow: auto;
+	font-family: var(--font-monospace);
+	font-size: 12.5px;
+	line-height: 1.6;
+	tab-size: 2;
+	white-space: pre;
+}
+
+.mermaid-explorer-highlight {
+	pointer-events: none;
+	display: none;
+	color: var(--text-normal);
+}
+
+.mermaid-explorer-code-editor {
+	resize: none;
+	border: 0;
+	box-shadow: none;
+	background: var(--code-background);
+	color: var(--text-normal);
+	caret-color: var(--text-normal);
+}
+
+.mermaid-explorer-code-editor::selection {
+	background: var(--text-selection);
+	color: var(--text-normal);
+}
+
+/* ─── Syntax tokens ─── */
+
+.token-keyword {
+	color: var(--color-cyan);
+}
+
+.token-edge {
+	color: var(--color-orange);
+}
+
+.token-declaration {
+	color: var(--color-green);
+}
+
+.token-comment {
+	color: var(--text-faint);
+}
+
+/* ─── Error states ─── */
+
+.mermaid-explorer-editor-error,
+.mermaid-explorer-error {
+	padding: 6px 12px;
+	color: var(--text-error);
+	background: var(--background-secondary);
+	white-space: pre-wrap;
+	font-size: 11.5px;
+}
+
+/* ─── Dashboard stats ─── */
+
+.mermaid-explorer-stat-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 8px;
+	padding: 16px;
+}
+
+.mermaid-explorer-stat,
+.mermaid-explorer-dashboard-section {
+	padding: 12px 14px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	background: var(--background-secondary);
+}
+
+.mermaid-explorer-stat-value {
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.mermaid-explorer-stat-label {
+	margin-top: 2px;
+}
+
+/* ─── Dashboard columns ─── */
+
+.mermaid-explorer-dashboard {
+	overflow: auto;
+}
+
+.mermaid-explorer-dashboard-columns {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+	padding: 0 16px 16px;
+}
+
+.mermaid-explorer-dashboard-section h3 {
+	margin: 0 0 8px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--text-muted);
+}
+
+.mermaid-explorer-dashboard-row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 10px;
+	padding: 5px 0;
+	border-top: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
+	font-size: 11.5px;
+}
+
+.mermaid-explorer-dashboard-row-button {
+	width: 100%;
+	margin: 0;
+	border-right: 0;
+	border-bottom: 0;
+	border-left: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+	color: var(--text-normal);
+	text-align: left;
+	cursor: pointer;
+	transition: background 100ms ease;
+}
+
+.mermaid-explorer-dashboard-row-button:hover,
+.mermaid-explorer-dashboard-row-button:focus-visible {
+	background: var(--background-modifier-hover);
+}
+
+.mermaid-explorer-dashboard-row span:first-child {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ─── Empty / limit states ─── */
+
+.mermaid-explorer-empty,
+.mermaid-explorer-list-limit {
+	padding: 24px 16px;
+	color: var(--text-faint);
+	text-align: center;
+	font-size: 12px;
+}
+
+.mermaid-explorer-rendering::before {
+	content: "Rendering…";
+	color: var(--text-faint);
+	font-size: 11px;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 780px) {
+	.mermaid-explorer-body,
+	.mermaid-explorer-detail,
+	.mermaid-explorer-editor,
+	.mermaid-explorer-dashboard-columns,
+	.mermaid-explorer-stat-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.mermaid-explorer-sidebar {
+		max-height: 42vh;
+		border-right: 0;
+		border-bottom: 1px solid var(--background-modifier-border);
+	}
+
+	.mermaid-explorer-metadata,
+	.mermaid-explorer-source-pane {
+		border-left: 0;
+		border-right: 0;
+		border-top: 1px solid var(--background-modifier-border);
+	}
+}

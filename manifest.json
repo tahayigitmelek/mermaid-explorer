@@ -1,0 +1,10 @@
+{
+	"id": "mermaid-explorer",
+	"name": "Mermaid Explorer",
+	"version": "1.0.0",
+	"minAppVersion": "1.11.4",
+	"description": "Discover, browse, preview, edit, and export every Mermaid diagram in your vault.",
+	"author": "Taha Yiğit Melek",
+	"authorUrl": "https://github.com/tahayigitmelek",
+	"isDesktopOnly": false
+}
