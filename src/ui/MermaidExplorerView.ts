@@ -136,18 +136,19 @@ export class MermaidExplorerView extends ItemView {
 	private renderHeader(parent: HTMLElement, snapshot: MermaidIndexSnapshot): void {
 		const header = parent.createDiv({ cls: 'mermaid-explorer-header' });
 		const total = snapshot.diagrams.length;
-		const titleGroup = header.createDiv();
+		const titleGroup = header.createDiv({ cls: 'mermaid-explorer-title-group' });
 		titleGroup.createEl('h2', { text: 'Mermaid explorer' });
 		titleGroup.createDiv({
 			cls: 'mermaid-explorer-subtitle',
 			text: `${total} diagram${total === 1 ? '' : 's'} indexed`,
 		});
 
-		const modeGroup = header.createDiv({ cls: 'mermaid-explorer-segmented' });
+		const headerActions = header.createDiv({ cls: 'mermaid-explorer-header-actions' });
+		const modeGroup = headerActions.createDiv({ cls: 'mermaid-explorer-segmented' });
 		this.createModeButton(modeGroup, 'viewer', 'Viewer');
 		this.createModeButton(modeGroup, 'editor', 'Editor');
 		this.createModeButton(modeGroup, 'dashboard', 'Dashboard');
-		createTextButton(header, 'Refresh now', 'refresh-cw', async () => this.plugin.refreshIndex(true));
+		createTextButton(headerActions, 'Refresh now', 'refresh-cw', async () => this.plugin.refreshIndex(true));
 
 		if (snapshot.progress.isIndexing) {
 			this.renderIndexProgress(header, snapshot.progress);
@@ -476,7 +477,10 @@ export class MermaidExplorerView extends ItemView {
 		const button = parent.createEl('button', {
 			text: label,
 			cls: this.mode === mode ? 'is-active' : '',
-			attr: { type: 'button' },
+			attr: {
+				type: 'button',
+				'aria-pressed': String(this.mode === mode),
+			},
 		});
 		button.addEventListener('click', () => {
 			this.mode = mode;

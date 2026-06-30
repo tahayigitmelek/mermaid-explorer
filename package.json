@@ -1,6 +1,6 @@
 {
 	"name": "mermaid-explorer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Vault-wide Mermaid diagram explorer and editor for Obsidian.",
 	"main": "main.js",
 	"type": "module",

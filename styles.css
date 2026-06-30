@@ -1,33 +1,48 @@
-/* ─── Root ─── */
-
 .mermaid-explorer {
+	--me-border: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+	--me-border-soft: color-mix(in srgb, var(--background-modifier-border) 42%, transparent);
+	--me-surface: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
+	--me-surface-raised: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+	--me-hover: color-mix(in srgb, var(--background-modifier-hover) 72%, transparent);
+	--me-accent-soft: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+	--me-accent-border: color-mix(in srgb, var(--interactive-accent) 34%, var(--me-border));
+
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	min-height: 0;
+	overflow: hidden;
 	background: var(--background-primary);
 	color: var(--text-normal);
 	font-family: var(--font-interface);
 }
 
-/* ─── Header ─── */
+.mermaid-explorer * {
+	box-sizing: border-box;
+}
 
 .mermaid-explorer-header {
+	flex: 0 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	gap: 10px;
-	padding: 14px 16px;
-	border-bottom: 1px solid var(--background-modifier-border);
+	gap: 10px 14px;
+	padding: 12px 14px;
+	border-bottom: 1px solid var(--me-border);
+	background: var(--background-primary);
+}
+
+.mermaid-explorer-title-group {
+	min-width: 150px;
 }
 
 .mermaid-explorer-header h2 {
 	margin: 0;
 	font-size: 15px;
-	font-weight: 600;
+	font-weight: 650;
 	line-height: 1.3;
-	letter-spacing: -0.01em;
+	letter-spacing: 0;
 }
 
 .mermaid-explorer-subtitle,
@@ -38,15 +53,22 @@
 	font-size: 11px;
 }
 
-/* ─── Index progress ─── */
+.mermaid-explorer-header-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 8px;
+}
 
 .mermaid-explorer-index-progress {
 	flex-basis: 100%;
 	min-width: 0;
 	display: grid;
-	grid-template-columns: auto minmax(140px, 1fr);
+	grid-template-columns: auto minmax(120px, 1fr);
 	align-items: center;
 	gap: 6px 10px;
+	padding-top: 2px;
 }
 
 .mermaid-explorer-index-progress-label {
@@ -66,7 +88,7 @@
 .mermaid-explorer-progress-track {
 	height: 4px;
 	overflow: hidden;
-	border-radius: 999px;
+	border-radius: 4px;
 	background: var(--background-modifier-border);
 }
 
@@ -77,61 +99,64 @@
 	transition: width 200ms ease;
 }
 
-/* ─── Body layout ─── */
-
 .mermaid-explorer-body {
+	flex: 1 1 auto;
 	display: grid;
-	grid-template-columns: minmax(240px, 30%) minmax(0, 1fr);
-	height: 100%;
+	grid-template-columns: minmax(260px, 31%) minmax(0, 1fr);
 	min-height: 0;
+	overflow: hidden;
 }
-
-/* ─── Sidebar ─── */
 
 .mermaid-explorer-sidebar {
 	display: flex;
 	flex-direction: column;
 	min-width: 0;
 	min-height: 0;
-	border-right: 1px solid var(--background-modifier-border);
-	background: var(--background-secondary);
+	border-right: 1px solid var(--me-border);
+	background: var(--me-surface);
 }
 
 .mermaid-explorer-search {
-	margin: 10px 12px 6px;
 	width: calc(100% - 24px);
-	min-height: 30px;
-	border-radius: 6px;
-	font-size: 12px;
+	min-height: 34px;
+	margin: 12px 12px 8px;
+	padding: 0 10px;
+	border: 1px solid var(--me-border);
+	border-radius: 8px;
+	background: var(--background-primary);
+	box-shadow: none;
+	font-size: 12.5px;
 }
 
-/* ─── Filters ─── */
+.mermaid-explorer-search:focus {
+	border-color: var(--me-accent-border);
+	box-shadow: 0 0 0 2px var(--me-accent-soft);
+}
 
 .mermaid-explorer-filters {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 6px;
-	padding: 0 12px 10px;
+	gap: 7px;
+	padding: 0 12px 12px;
 }
 
 .mermaid-explorer-select {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 4px;
 	min-width: 0;
 	color: var(--text-muted);
-	font-size: 10px;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
+	font-size: 11px;
+	letter-spacing: 0;
 }
 
 .mermaid-explorer-select select {
 	width: 100%;
 	min-width: 0;
+	height: 30px;
+	border-radius: 7px;
 	font-size: 12px;
 }
-
-/* ─── List header + shared bar styles ─── */
 
 .mermaid-explorer-list-header,
 .mermaid-explorer-action-bar,
@@ -145,28 +170,32 @@
 
 .mermaid-explorer-list-header {
 	justify-content: space-between;
-	padding: 6px 12px;
-	border-top: 1px solid var(--background-modifier-border);
-	border-bottom: 1px solid var(--background-modifier-border);
-	font-size: 11px;
-	color: var(--text-faint);
+	padding: 8px 12px;
+	border-top: 1px solid var(--me-border-soft);
+	border-bottom: 1px solid var(--me-border);
+	color: var(--text-muted);
+	font-size: 11.5px;
+	background: color-mix(in srgb, var(--background-primary) 42%, transparent);
 }
 
-/* ─── Diagram list ─── */
-
 .mermaid-explorer-list {
-	overflow: auto;
+	flex: 1 1 auto;
 	min-height: 0;
+	overflow: auto;
+	padding: 4px 6px 8px;
 }
 
 .mermaid-explorer-list-item {
+	position: relative;
 	display: grid;
 	grid-template-columns: 64px minmax(0, 1fr);
 	gap: 10px;
-	padding: 10px 12px;
-	border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
+	margin: 2px 0;
+	padding: 8px;
+	border: 1px solid transparent;
+	border-radius: 8px;
 	cursor: pointer;
-	transition: background 120ms ease;
+	transition: background 120ms ease, border-color 120ms ease;
 }
 
 .mermaid-explorer-list-item.has-no-thumbnail {
@@ -174,14 +203,24 @@
 }
 
 .mermaid-explorer-list-item:hover {
-	background: var(--background-modifier-hover);
+	background: var(--me-hover);
 }
 
 .mermaid-explorer-list-item.is-selected {
-	background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-primary));
+	border-color: var(--me-accent-border);
+	background: var(--me-accent-soft);
 }
 
-/* ─── Thumbnails ─── */
+.mermaid-explorer-list-item.is-selected::before {
+	content: "";
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 0;
+	width: 2px;
+	border-radius: 2px;
+	background: var(--interactive-accent);
+}
 
 .mermaid-explorer-thumbnail {
 	width: 64px;
@@ -190,9 +229,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	border: 1px solid var(--me-border);
+	border-radius: 7px;
 	background: var(--background-primary);
-	border: 1px solid var(--background-modifier-border);
-	border-radius: 5px;
 }
 
 .mermaid-explorer-thumbnail.is-deferred::before {
@@ -203,47 +242,43 @@
 	border: 1.5px solid var(--background-modifier-border);
 }
 
-/* ─── List item content ─── */
-
 .mermaid-explorer-list-content {
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	justify-content: center;
+	gap: 3px;
 }
 
 .mermaid-explorer-list-title {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: 12.5px;
-	font-weight: 500;
+	font-size: 12.75px;
+	font-weight: 600;
 }
 
 .mermaid-explorer-list-path {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: 11px;
 }
-
-/* ─── Badge ─── */
 
 .mermaid-explorer-badge {
 	display: inline-flex;
 	align-items: center;
 	width: fit-content;
 	max-width: 100%;
-	padding: 1px 6px;
-	border-radius: 4px;
-	background: color-mix(in srgb, var(--interactive-accent) 10%, transparent);
+	min-height: 18px;
+	padding: 1px 7px;
+	border: 1px solid color-mix(in srgb, var(--interactive-accent) 16%, transparent);
+	border-radius: 8px;
+	background: color-mix(in srgb, var(--interactive-accent) 8%, transparent);
 	color: var(--text-muted);
-	font-size: 10px;
-	line-height: 1.5;
+	font-size: 10.5px;
+	line-height: 1.4;
 	white-space: nowrap;
 }
-
-/* ─── Workspace ─── */
 
 .mermaid-explorer-workspace {
 	min-width: 0;
@@ -251,18 +286,17 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	background: var(--background-primary);
 }
-
-/* ─── Action bar ─── */
 
 .mermaid-explorer-action-bar {
+	flex: 0 0 auto;
 	flex-wrap: wrap;
-	padding: 8px 12px;
-	gap: 2px;
-	border-bottom: 1px solid var(--background-modifier-border);
+	gap: 6px;
+	padding: 8px 10px;
+	border-bottom: 1px solid var(--me-border);
+	background: var(--background-primary);
 }
-
-/* ─── Buttons ─── */
 
 .mermaid-explorer-icon-button,
 .mermaid-explorer-text-button,
@@ -270,49 +304,69 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 5px;
-	min-height: 28px;
-	border-radius: 5px;
-	transition: background 100ms ease, color 100ms ease;
+	gap: 6px;
+	min-height: 30px;
+	border-radius: 7px;
+	box-shadow: none;
+	transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
 }
 
 .mermaid-explorer-icon-button {
-	width: 28px;
+	width: 30px;
 	padding: 0;
 }
 
-/* ─── Segmented control (mode switcher) ─── */
+.mermaid-explorer-text-button {
+	padding: 0 10px;
+}
+
+.mermaid-explorer-icon-button:hover,
+.mermaid-explorer-text-button:hover {
+	background: var(--me-hover);
+}
+
+.mermaid-explorer-icon-button:focus-visible,
+.mermaid-explorer-text-button:focus-visible,
+.mermaid-explorer-segmented button:focus-visible,
+.mermaid-explorer-dashboard-row-button:focus-visible {
+	outline: 2px solid var(--me-accent-border);
+	outline-offset: 2px;
+}
 
 .mermaid-explorer-segmented {
 	padding: 2px;
-	border: 1px solid var(--background-modifier-border);
-	border-radius: 6px;
-	background: var(--background-secondary);
+	border: 1px solid var(--me-border);
+	border-radius: 8px;
+	background: var(--me-surface);
 }
 
 .mermaid-explorer-segmented button {
+	min-height: 28px;
 	padding: 0 10px;
-	min-height: 26px;
+	border: 0;
 	background: transparent;
-	box-shadow: none;
+	color: var(--text-muted);
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 600;
+}
+
+.mermaid-explorer-segmented button:hover {
+	color: var(--text-normal);
+	background: var(--me-hover);
 }
 
 .mermaid-explorer-segmented button.is-active {
-	background: var(--interactive-accent);
-	color: var(--text-on-accent);
-	border-radius: 4px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	box-shadow: 0 0 0 1px var(--me-border);
 }
-
-/* ─── Detail / Editor layout ─── */
 
 .mermaid-explorer-detail,
 .mermaid-explorer-editor {
+	flex: 1 1 auto;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) 260px;
+	grid-template-columns: minmax(0, 1fr) 270px;
 	gap: 0;
-	height: 100%;
 	min-height: 0;
 }
 
@@ -327,18 +381,31 @@
 
 .mermaid-explorer-preview-tools,
 .mermaid-explorer-editor-tools {
-	padding: 6px 8px;
-	border-bottom: 1px solid var(--background-modifier-border);
+	flex: 0 0 auto;
+	gap: 6px;
+	padding: 7px 10px;
+	border-bottom: 1px solid var(--me-border);
+	background: var(--background-primary);
 }
-
-/* ─── Preview frame ─── */
 
 .mermaid-explorer-preview-frame,
 .mermaid-explorer-live-preview {
-	flex: 1;
+	flex: 1 1 auto;
+	min-height: 0;
 	overflow: auto;
-	padding: 20px;
+	padding: 22px;
 	background: var(--background-primary);
+}
+
+.mermaid-explorer-preview-frame {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mermaid-explorer-live-preview {
+	align-items: center;
+	justify-content: center;
 }
 
 .mermaid-explorer-preview-frame svg,
@@ -352,36 +419,33 @@
 	transform-origin: center center;
 }
 
-/* ─── Metadata panel ─── */
-
 .mermaid-explorer-metadata {
 	overflow: auto;
-	padding: 16px;
-	border-left: 1px solid var(--background-modifier-border);
-	background: var(--background-secondary);
+	padding: 14px;
+	border-left: 1px solid var(--me-border);
+	background: var(--me-surface);
 }
 
-.mermaid-explorer-metadata h3 {
-	margin: 0 0 12px;
-	font-size: 12px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
+.mermaid-explorer-metadata h3,
+.mermaid-explorer-dashboard-section h3 {
+	margin: 0 0 10px;
 	color: var(--text-muted);
+	font-size: 12px;
+	font-weight: 650;
+	letter-spacing: 0;
 }
 
 .mermaid-explorer-metadata-row {
 	display: grid;
-	grid-template-columns: 80px minmax(0, 1fr);
-	gap: 8px;
-	padding: 6px 0;
-	border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
-	font-size: 11.5px;
+	grid-template-columns: 74px minmax(0, 1fr);
+	gap: 10px;
+	padding: 7px 0;
+	border-bottom: 1px solid var(--me-border-soft);
+	font-size: 11.75px;
 }
 
 .mermaid-explorer-metadata-row span:first-child {
 	color: var(--text-faint);
-	font-size: 11px;
 }
 
 .mermaid-explorer-metadata-row span:last-child {
@@ -391,23 +455,21 @@
 .mermaid-explorer-metadata-tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 4px;
+	gap: 5px;
 	margin-top: 14px;
 }
-
-/* ─── Editor panes ─── */
 
 .mermaid-explorer-editor {
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .mermaid-explorer-source-pane {
-	border-right: 1px solid var(--background-modifier-border);
+	border-right: 1px solid var(--me-border);
 }
 
 .mermaid-explorer-code-shell {
 	position: relative;
-	flex: 1;
+	flex: 1 1 auto;
 	min-height: 0;
 	overflow: hidden;
 	background: var(--code-background);
@@ -436,10 +498,15 @@
 .mermaid-explorer-code-editor {
 	resize: none;
 	border: 0;
+	border-radius: 0;
 	box-shadow: none;
 	background: var(--code-background);
 	color: var(--text-normal);
 	caret-color: var(--text-normal);
+}
+
+.mermaid-explorer-code-editor:focus {
+	box-shadow: inset 0 0 0 2px var(--me-accent-soft);
 }
 
 .mermaid-explorer-code-editor::selection {
@@ -447,91 +514,80 @@
 	color: var(--text-normal);
 }
 
-/* ─── Syntax tokens ─── */
-
-.token-keyword {
+.mermaid-explorer .token-keyword {
 	color: var(--color-cyan);
 }
 
-.token-edge {
+.mermaid-explorer .token-edge {
 	color: var(--color-orange);
 }
 
-.token-declaration {
+.mermaid-explorer .token-declaration {
 	color: var(--color-green);
 }
 
-.token-comment {
+.mermaid-explorer .token-comment {
 	color: var(--text-faint);
 }
 
-/* ─── Error states ─── */
-
 .mermaid-explorer-editor-error,
 .mermaid-explorer-error {
-	padding: 6px 12px;
+	padding: 8px 12px;
+	border-top: 1px solid var(--me-border-soft);
 	color: var(--text-error);
 	background: var(--background-secondary);
 	white-space: pre-wrap;
 	font-size: 11.5px;
 }
 
-/* ─── Dashboard stats ─── */
+.mermaid-explorer-dashboard {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding: 14px;
+	background: var(--background-primary);
+}
 
 .mermaid-explorer-stat-grid {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 8px;
-	padding: 16px;
+	gap: 10px;
+	margin-bottom: 10px;
 }
 
 .mermaid-explorer-stat,
 .mermaid-explorer-dashboard-section {
-	padding: 12px 14px;
-	border: 1px solid var(--background-modifier-border);
+	padding: 13px 14px;
+	border: 1px solid var(--me-border);
 	border-radius: 8px;
-	background: var(--background-secondary);
+	background: var(--me-surface-raised);
 }
 
 .mermaid-explorer-stat-value {
 	font-size: 22px;
 	font-weight: 700;
-	letter-spacing: -0.02em;
+	letter-spacing: 0;
+	line-height: 1.1;
 }
 
 .mermaid-explorer-stat-label {
-	margin-top: 2px;
-}
-
-/* ─── Dashboard columns ─── */
-
-.mermaid-explorer-dashboard {
-	overflow: auto;
+	margin-top: 4px;
 }
 
 .mermaid-explorer-dashboard-columns {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 8px;
-	padding: 0 16px 16px;
-}
-
-.mermaid-explorer-dashboard-section h3 {
-	margin: 0 0 8px;
-	font-size: 12px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	color: var(--text-muted);
+	gap: 10px;
 }
 
 .mermaid-explorer-dashboard-row {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	gap: 10px;
-	padding: 5px 0;
-	border-top: 1px solid color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
-	font-size: 11.5px;
+	align-items: center;
+	min-height: 30px;
+	padding: 6px 0;
+	border-top: 1px solid var(--me-border-soft);
+	font-size: 11.75px;
 }
 
 .mermaid-explorer-dashboard-row-button {
@@ -549,9 +605,8 @@
 	transition: background 100ms ease;
 }
 
-.mermaid-explorer-dashboard-row-button:hover,
-.mermaid-explorer-dashboard-row-button:focus-visible {
-	background: var(--background-modifier-hover);
+.mermaid-explorer-dashboard-row-button:hover {
+	background: var(--me-hover);
 }
 
 .mermaid-explorer-dashboard-row span:first-child {
@@ -559,8 +614,6 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
-/* ─── Empty / limit states ─── */
 
 .mermaid-explorer-empty,
 .mermaid-explorer-list-limit {
@@ -571,14 +624,31 @@
 }
 
 .mermaid-explorer-rendering::before {
-	content: "Rendering…";
+	content: "Rendering...";
 	color: var(--text-faint);
 	font-size: 11px;
 }
 
-/* ─── Responsive ─── */
+@media (max-width: 920px) {
+	.mermaid-explorer-body {
+		grid-template-columns: minmax(220px, 36%) minmax(0, 1fr);
+	}
+
+	.mermaid-explorer-detail {
+		grid-template-columns: minmax(0, 1fr) 240px;
+	}
+}
 
 @media (max-width: 780px) {
+	.mermaid-explorer-header {
+		align-items: flex-start;
+	}
+
+	.mermaid-explorer-header-actions {
+		width: 100%;
+		justify-content: flex-start;
+	}
+
 	.mermaid-explorer-body,
 	.mermaid-explorer-detail,
 	.mermaid-explorer-editor,
@@ -590,13 +660,36 @@
 	.mermaid-explorer-sidebar {
 		max-height: 42vh;
 		border-right: 0;
-		border-bottom: 1px solid var(--background-modifier-border);
+		border-bottom: 1px solid var(--me-border);
 	}
 
 	.mermaid-explorer-metadata,
 	.mermaid-explorer-source-pane {
 		border-left: 0;
 		border-right: 0;
-		border-top: 1px solid var(--background-modifier-border);
+		border-top: 1px solid var(--me-border);
+	}
+}
+
+@media (max-width: 520px) {
+	.mermaid-explorer-filters {
+		grid-template-columns: 1fr;
+	}
+
+	.mermaid-explorer-list-item {
+		grid-template-columns: 52px minmax(0, 1fr);
+	}
+
+	.mermaid-explorer-thumbnail {
+		width: 52px;
+		height: 42px;
+	}
+
+	.mermaid-explorer-segmented {
+		width: 100%;
+	}
+
+	.mermaid-explorer-segmented button {
+		flex: 1 1 0;
 	}
 }
